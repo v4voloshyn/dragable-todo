@@ -43,14 +43,16 @@ function App() {
   
   const updatePos = (data, id) => {
     let newTodoList = [...todoList];
+
     newTodoList.find(el => el.id === id).defaultPos = {
       x: data.x,
       y: data.y
     }
+
     setTodoList(newTodoList);
   }
   
-  const nodeRef = useRef(null);
+  const nodeRef = useRef(null);// Need in Strict Mode
   
   return (
     <div className='App'>
@@ -63,7 +65,7 @@ function App() {
         <button className="enter"
         onClick={addTodoItem}>Enter</button>
       </div>
-      
+
       {
         todoList.map((todoEl) => {
           return (
@@ -74,14 +76,12 @@ function App() {
             onStop={(_, data) => updatePos(data, todoEl.id)}>
               <div 
                 className='todo__item' 
-                style={{backgroundColor: todoEl.color}}
-                >
-                  `{todoEl.todoName}`
+                style={{backgroundColor: todoEl.color}}>
+                  {todoEl.todoName}
                 <button 
                   className='delete'
-                  onClick={() => deleteTodoItem(todoEl.id)}
-                >
-                  X
+                  onClick={() => deleteTodoItem(todoEl.id)}>
+                    X
                 </button>
               </div>
             </Draggable> 
